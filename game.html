@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rock Paper Scissors Game</title>
+    <style>
+      button {
+        margin: 5px;
+        padding: 10px 20px;
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Rock Paper Scissors Game</h1>
+    <button id="rock">Rock</button>
+    <button id="paper">Paper</button>
+    <button id="scissors">Scissors</button>
+    <p id="result"></p>
+    <script>
+      const arr = ["Rock", "Paper", "Scissors"];
+      document.getElementById("rock").addEventListener("click", function () {
+        playGame(0);
+      });
+      document.getElementById("paper").addEventListener("click", function () {
+        playGame(1);
+      });
+      document
+        .getElementById("scissors")
+        .addEventListener("click", function () {
+          playGame(2);
+        });
+      function playGame(playerChoice) {
+        const computerChoice = Math.floor(Math.random() * 3);
+        const player = arr[playerChoice];
+        const computer = arr[computerChoice];
+        let resultGame = `Player chose ${player}, Computer chose ${computer}. `;
+        if (playerChoice === computerChoice) {
+          resultGame += "It's a tie!";
+        } else if (
+          (playerChoice === 0 && computerChoice === 2) ||
+          (playerChoice === 1 && computerChoice === 0) ||
+          (playerChoice === 2 && computerChoice === 1)
+        ) {
+          resultGame += "Player wins!";
+        } else {
+          resultGame += "Computer wins!";
+        }
+        document.getElementById("result").textContent = resultGame;
+      }
+    </script>
+  </body>
+</html>

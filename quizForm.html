@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Форма с вопросами</title>
+  </head>
+  <body>
+    <form id="quizForm">
+      <label for="answer1">Какая называется столица Франции?</label>
+      <input type="text" id="answer1" name="answer1" />
+      <label for="answer2">Сколько месяцев в году?</label>
+      <input type="text" id="answer2" name="answer2" />
+      <label for="answer3">Что является главным компонентом воды?</label>
+      <input type="text" id="answer3" name="answer3" />
+      <button type="button" onclick="checkAnswers()">Проверить ответы</button>
+    </form>
+    <div id="results"></div>
+    <script>
+      function checkAnswers() {
+        const userResponse1 = document.getElementById("answer1").value;
+        const userResponse2 = document.getElementById("answer2").value;
+        const userResponse3 = document.getElementById("answer3").value;
+        const correctAnswer1 = ["Париж", "ПАРИЖ", "париж"];
+        const correctAnswer2 = ["12", "двенадцать"];
+        const correctAnswer3 = [
+          "Кислород и водород",
+          "Водород и кислород",
+          "кислород и водород",
+          "водород и кислород",
+          "КИСЛОРОД И ВОДОРОД",
+          "ВОДОРОД И КИСЛОРОД",
+          "кислород",
+          "водород",
+          "КИСЛОРОД",
+          "ВОДОРОД",
+          "Водород"
+        ];
+
+        function checkAnswer(userAnswer, correctAnswers) {
+          let result = {
+            isCorrect: false,
+          };
+          console.log(result);
+
+          if (correctAnswers.includes(userAnswer.trim())) {
+            result.isCorrect = true;
+            result.message = "Правильно!";
+          } else {
+            result.message = "Неправильно.";
+          }
+
+          return result;
+        }
+
+        const result1 = checkAnswer(userResponse1, correctAnswer1);
+        const result2 = checkAnswer(userResponse2, correctAnswer2);
+        const result3 = checkAnswer(userResponse3, correctAnswer3);
+
+        document.getElementById("results").innerHTML = `
+        <p>Результат по первому вопросу: ${
+          result1.isCorrect ? "Правильно" : "Неправильно"
+        }</p>
+        <p>Результат по второму вопросу: ${
+          result2.isCorrect ? "Правильно" : "Неправильно"
+        }</p>
+        <p>Результат по третьему вопросу: ${
+          result3.isCorrect ? "Правильно" : "Неправильно"
+        }</p>
+      `;
+      }
+    </script>
+  </body>
+</html>
